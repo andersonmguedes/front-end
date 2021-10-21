@@ -1,11 +1,11 @@
-import './App.css';
+import './app.css';
 import {Switch, Route } from 'react-router-dom';
-import Header from './components/shared/Header/Header';
-import Footer from './components/shared/Footer/Footer';
-import Home from './pages/Home/Home';
-import Cadastro from './pages/Cadastro/Cadastro';
-import TarefaView from './pages/TarefaView/TarefaView';
-import Edicao from './pages/Edicao/Edicao';
+import Header from './components/shared/header/header';
+import Footer from './components/shared/footer/footer';
+import Home from './pages/home/home';
+import Cadastro from './pages/cadastro/cadastro';
+import TarefaView from './pages/tarefaview/tarefaview';
+import Edicao from './pages/edicao/edicao';
 
 function App() {
   return (

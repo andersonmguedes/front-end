@@ -1,5 +1,6 @@
 import React from 'react';
-import './Cadastro.css';
+import{Link} from 'react-router-dom';
+import './cadastro.css';
 import Api from '../../api/api';
 
 const Cadastro = (props) => {
@@ -9,8 +10,8 @@ const Cadastro = (props) => {
     evento.preventDefault();
     const titulo = evento.target.titulo.value;
     const descricao = evento.target.descricao.value;
-    const prazo = evento.target.prazo.value;
-    const datacriacao = evento.target.datacriacao.value;
+    const prazo = ((data.getDate() )) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear();
+    const data = new Date (evento.target.prazo.value);
     const status = evento.target.status.value;
     const prioridade = evento.target.prioridade.value;
 
@@ -18,7 +19,6 @@ const Cadastro = (props) => {
       titulo,
       descricao,
       prazo,
-      datacriacao,
       status,
       prioridade
     }
@@ -151,7 +151,7 @@ const Cadastro = (props) => {
       <div className="row">
         <div className="col">
           <button className="btn btn-success" type="submit">Enviar</button>
-          <button className="btn btn-outline-default">Voltar</button>
+          <Link className ="link" to= "/"><button className="btn btn-outline-default">Voltar</button></Link>
         </div>
         </div>
         </div>

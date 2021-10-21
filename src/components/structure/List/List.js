@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import Card from '../Card/Card';
+import Card from '../card/card';
 import Api from '../../../api/api';
 
 const List = () => {

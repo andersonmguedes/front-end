@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import {Link} from 'react-router-dom';
 import Api from "../../api/api";
+import moment from "moment";
 
 const Edicao = (props) => {
   const _id = props.match.params.id;
@@ -7,14 +9,15 @@ const Edicao = (props) => {
   const [tarefa, setTarefa] = useState({});
 
   useEffect(() => {
-    getTarefaById()
+    getTarefaById();
   }, []);
 
-  const getTarefaById = async () => {
+    const getTarefaById = async () => {
     const response = await Api.fetchGetById(_id);
     const result = await response.json();
     setTarefa(result);
   };
+
   const handleFieldsChange = (event) => {
     const campos = { ...tarefa };
     campos[event.target.name] = event.target.value;
@@ -25,7 +28,9 @@ const Edicao = (props) => {
   const handleSubmit = async (evento) => {
     evento.preventDefault();
     const tarefaObj = { ...tarefa };
-    try {
+      const data= new Date(tarefaObj.prazo)
+      tarefaObj.prazo = ((data.getDate() )) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear();
+      try {
       const response = await Api.fetchPut(tarefaObj, _id);
       const result = await response.json();
       alert(result.message);
@@ -35,9 +40,10 @@ const Edicao = (props) => {
     }
   };
 
-  return (
+    const transformDate = (prazo) => {
+      return moment(prazo).utc().format('YYYY-MM-DD')};
 
-
+    return (
 
 //  <div className="container cadastro">
   
@@ -172,7 +178,6 @@ const Edicao = (props) => {
               className="form-control"
               name="prioridade"
               id="floatingprioridade"
-              value={tarefa.prioridade}
               onChange={handleFieldsChange}
               >
               <option value="alta">Alta</option>
@@ -187,11 +192,10 @@ const Edicao = (props) => {
               className="form-control"
               name="status"
               id="floatingstatus"
-              value={tarefa.status}
               onChange={handleFieldsChange}
               >
-              <option value="por fazer">Por Fazer</option>
-              <option value="em andamento">Em Andamento</option>
+              <option value="Fazer">Por Fazer</option>
+              <option value="Fazendo">Em Andamento</option>
               <option value="concluida">Concluida</option>
             </select>
             <label htmlFor="floatingstatus">Status</label>
@@ -200,10 +204,8 @@ const Edicao = (props) => {
       </div>
       <div className="row mb-4">
         <div className="col">
-          <button className="btn btn-success" type="submit">
-            Enviar
-          </button>
-          <button className="btn btn-outline-default">Voltar</button>
+          <button className="btn btn-success" type="submit">Enviar</button>
+          <Link className="link" to="/"><button className="btn btn-outline-default">Voltar</button></Link>
         </div>
       </div>
       </div>

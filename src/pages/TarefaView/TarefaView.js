@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Api from '../../api/api';
 import 'react-responsive-modal/styles.css';
@@ -14,12 +14,13 @@ const TarefaView = (props) => {
   const onCloseModal = () => setOpen(false);
 
   useEffect(() => {
-    getTarefaById()
-  }, [] );
+      getTarefaById();
+  }, []);
 
   const getTarefaById = async () => {
     const response = await Api.fetchGetById(_id);
     const result = await response.json();
+    console.log(result)
     setTarefa(result);
   }
 
@@ -40,7 +41,7 @@ const TarefaView = (props) => {
         <h3 className="text-center">{tarefa.datacriacao}</h3>
         <h4 className="text-center">{tarefa.prioridade}</h4>
         <h5 className="text-center">{tarefa.status}</h5>
-        <h6 className="text-center">{tarefa.prazo}</h6>
+        <h6 className="text-center">Prazo: {tarefa.prazo}</h6>
 
 
 
